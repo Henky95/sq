@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 
+import com.sun.tools.javac.util.List;
 import hanze.nl.tijdtools.TijdFuncties;
 
 public class Runner {
@@ -52,49 +53,41 @@ public class Runner {
 	}
 	
 	public static int initBussen(){
-		Bus bus1=new Bus(Lijnen.LIJN1, Bedrijven.ARRIVA, 1);
-		Bus bus2=new Bus(Lijnen.LIJN2, Bedrijven.ARRIVA, 1);
-		Bus bus3=new Bus(Lijnen.LIJN3, Bedrijven.ARRIVA, 1);
-		Bus bus4=new Bus(Lijnen.LIJN4, Bedrijven.ARRIVA, 1);
-		Bus bus5=new Bus(Lijnen.LIJN5, Bedrijven.FLIXBUS, 1);
-		Bus bus6=new Bus(Lijnen.LIJN6, Bedrijven.QBUZZ, 1);
-		Bus bus7=new Bus(Lijnen.LIJN7, Bedrijven.QBUZZ, 1);
-		Bus bus8=new Bus(Lijnen.LIJN1, Bedrijven.ARRIVA, 1);
-		Bus bus9=new Bus(Lijnen.LIJN4, Bedrijven.ARRIVA, 1);
-		Bus bus10=new Bus(Lijnen.LIJN5, Bedrijven.FLIXBUS, 1);
-		addBus(3, bus1);
-		addBus(5, bus2);
-		addBus(4, bus3);
-		addBus(6, bus4);	
-		addBus(3, bus5);
-		addBus(5, bus6);
-		addBus(4, bus7); 
-		addBus(6, bus8);	
-		addBus(12, bus9); 
-		addBus(10, bus10);	
-		Bus bus11=new Bus(Lijnen.LIJN1, Bedrijven.ARRIVA, -1);
-		Bus bus12=new Bus(Lijnen.LIJN2, Bedrijven.ARRIVA, -1);
-		Bus bus13=new Bus(Lijnen.LIJN3, Bedrijven.ARRIVA, -1);
-		Bus bus14=new Bus(Lijnen.LIJN4, Bedrijven.ARRIVA, -1);
-		Bus bus15=new Bus(Lijnen.LIJN5, Bedrijven.FLIXBUS, -1);
-		Bus bus16=new Bus(Lijnen.LIJN6, Bedrijven.QBUZZ, -1);
-		Bus bus17=new Bus(Lijnen.LIJN7, Bedrijven.QBUZZ, -1);
-		Bus bus18=new Bus(Lijnen.LIJN1, Bedrijven.ARRIVA, -1);
-		Bus bus19=new Bus(Lijnen.LIJN4, Bedrijven.ARRIVA, -1);
-		Bus bus20=new Bus(Lijnen.LIJN5, Bedrijven.FLIXBUS, -1);
-		addBus(3, bus11);
-		addBus(5, bus12);
-		addBus(4, bus13);
-		addBus(6, bus14);	
-		addBus(3, bus15);
-		addBus(5, bus16);
-		addBus(4, bus17); 
-		addBus(6, bus18);	
-		addBus(12, bus19); 
-		addBus(10, bus20);	
-		return Collections.min(busStart.keySet());
+		List<Bus> busses = createBusses(1);
+		addBusses(busses);
+
+		busses = createBusses(2);
+		addBusses(busses);
 	}
-	
+
+	public static List<Bus> createBusses(int richting){
+		Bus bus1=new Bus(Lijnen.LIJN1, Bedrijven.ARRIVA, richting);
+		Bus bus2=new Bus(Lijnen.LIJN2, Bedrijven.ARRIVA, richting);
+		Bus bus3=new Bus(Lijnen.LIJN3, Bedrijven.ARRIVA, richting);
+		Bus bus4=new Bus(Lijnen.LIJN4, Bedrijven.ARRIVA, richting);
+		Bus bus5=new Bus(Lijnen.LIJN5, Bedrijven.FLIXBUS, richting);
+		Bus bus6=new Bus(Lijnen.LIJN6, Bedrijven.QBUZZ, richting);
+		Bus bus7=new Bus(Lijnen.LIJN7, Bedrijven.QBUZZ, richting);
+		Bus bus8=new Bus(Lijnen.LIJN1, Bedrijven.ARRIVA, richting);
+		Bus bus9=new Bus(Lijnen.LIJN4, Bedrijven.ARRIVA, richting);
+		Bus bus10=new Bus(Lijnen.LIJN5, Bedrijven.FLIXBUS, richting);
+
+		return List.of(bus1,bus2,bus3,bus4,bus5,bus6,bus7,bus8,bus9,bus10);
+	}
+
+	public static void addBusses(List<Bus> busses){
+		addBus(3, busses.get(0));
+		addBus(5, busses.get(1));
+		addBus(4, busses.get(2));
+		addBus(6, busses.get(3));
+		addBus(3, busses.get(4));
+		addBus(5, busses.get(5));
+		addBus(4, busses.get(6));
+		addBus(6, busses.get(7));
+		addBus(12, busses.get(8));
+		addBus(10, busses.get(9));
+	}
+
 	public static void main(String[] args) throws InterruptedException {
 		int tijd=0;
 		int counter=0;
