@@ -9,13 +9,13 @@ import hanze.nl.tijdtools.TijdFuncties;
 
 public class Runner {
 
-	private static HashMap<Integer,ArrayList<Bus>> busStart = new HashMap<Integer,ArrayList<Bus>>();
-	private static ArrayList<Bus> actieveBussen = new ArrayList<Bus>();
+	private static HashMap<Integer,ArrayList<IBus>> busStart = new HashMap<Integer,ArrayList<IBus>>();
+	private static ArrayList<IBus> actieveBussen = new ArrayList<IBus>();
 	private static int interval=1000;
 	private static int syncInterval=5;
 	
-	private static void addBus(int starttijd, Bus bus){
-		ArrayList<Bus> bussen = new ArrayList<Bus>();
+	private static void addBus(int starttijd, IBus bus){
+		ArrayList<IBus> bussen = new ArrayList<IBus>();
 		if (busStart.containsKey(starttijd)) {
 			bussen = busStart.get(starttijd);
 		}
@@ -25,7 +25,7 @@ public class Runner {
 	}
 	
 	private static int startBussen(int tijd){
-		for (Bus bus : busStart.get(tijd)){
+		for (IBus bus : busStart.get(tijd)){
 			actieveBussen.add(bus);
 		}
 		busStart.remove(tijd);
@@ -33,9 +33,9 @@ public class Runner {
 	}
 	
 	public static void moveBussen(int nu){
-		Iterator<Bus> itr = actieveBussen.iterator();
+		Iterator<IBus> itr = actieveBussen.iterator();
 		while (itr.hasNext()) {
-			Bus bus = itr.next();
+			IBus bus = itr.next();
 			boolean eindpuntBereikt = bus.move();
 			if (eindpuntBereikt) {
 				bus.sendLastETA(nu);
@@ -45,37 +45,37 @@ public class Runner {
 	}
 
 	public static void sendETAs(int nu){
-		Iterator<Bus> itr = actieveBussen.iterator();
+		Iterator<IBus> itr = actieveBussen.iterator();
 		while (itr.hasNext()) {
-			Bus bus = itr.next();
+			IBus bus = itr.next();
 			bus.sendETAs(nu);
 		}				
 	}
 	
 	public static int initBussen(){
-		List<Bus> busses = createBusses(1);
+		List<IBus> busses = createBusses(1);
 		addBusses(busses);
 
 		busses = createBusses(2);
 		addBusses(busses);
 	}
 
-	public static List<Bus> createBusses(int richting){
-		Bus bus1=new Bus(Lijnen.LIJN1, Bedrijven.ARRIVA, richting);
-		Bus bus2=new Bus(Lijnen.LIJN2, Bedrijven.ARRIVA, richting);
-		Bus bus3=new Bus(Lijnen.LIJN3, Bedrijven.ARRIVA, richting);
-		Bus bus4=new Bus(Lijnen.LIJN4, Bedrijven.ARRIVA, richting);
-		Bus bus5=new Bus(Lijnen.LIJN5, Bedrijven.FLIXBUS, richting);
-		Bus bus6=new Bus(Lijnen.LIJN6, Bedrijven.QBUZZ, richting);
-		Bus bus7=new Bus(Lijnen.LIJN7, Bedrijven.QBUZZ, richting);
-		Bus bus8=new Bus(Lijnen.LIJN1, Bedrijven.ARRIVA, richting);
-		Bus bus9=new Bus(Lijnen.LIJN4, Bedrijven.ARRIVA, richting);
-		Bus bus10=new Bus(Lijnen.LIJN5, Bedrijven.FLIXBUS, richting);
+	public static List<IBus> createBusses(int richting){
+		IBus bus1=new Bus(Lijnen.LIJN1, Bedrijven.ARRIVA, richting);
+		IBus bus2=new Bus(Lijnen.LIJN2, Bedrijven.ARRIVA, richting);
+		IBus bus3=new Bus(Lijnen.LIJN3, Bedrijven.ARRIVA, richting);
+		IBus bus4=new Bus(Lijnen.LIJN4, Bedrijven.ARRIVA, richting);
+		IBus bus5=new Bus(Lijnen.LIJN5, Bedrijven.FLIXBUS, richting);
+		IBus bus6=new Bus(Lijnen.LIJN6, Bedrijven.QBUZZ, richting);
+		IBus bus7=new Bus(Lijnen.LIJN7, Bedrijven.QBUZZ, richting);
+		IBus bus8=new Bus(Lijnen.LIJN1, Bedrijven.ARRIVA, richting);
+		IBus bus9=new Bus(Lijnen.LIJN4, Bedrijven.ARRIVA, richting);
+		IBus bus10=new Bus(Lijnen.LIJN5, Bedrijven.FLIXBUS, richting);
 
 		return List.of(bus1,bus2,bus3,bus4,bus5,bus6,bus7,bus8,bus9,bus10);
 	}
 
-	public static void addBusses(List<Bus> busses){
+	public static void addBusses(List<IBus> busses){
 		addBus(3, busses.get(0));
 		addBus(5, busses.get(1));
 		addBus(4, busses.get(2));
