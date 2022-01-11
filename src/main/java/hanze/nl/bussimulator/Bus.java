@@ -3,7 +3,7 @@ package hanze.nl.bussimulator;
 import com.thoughtworks.xstream.XStream;
 import hanze.nl.bussimulator.Halte.Positie;
 
-public class Bus{
+public class Bus extends IBus {
 
 	private Bedrijven bedrijf;
 	private Lijnen lijn;
@@ -22,16 +22,19 @@ public class Bus{
 		this.bijHalte = false;
 		this.busID = "Niet gestart";
 	}
-	
+
+	@Override
 	public void setbusID(int starttijd){
 		this.busID=starttijd+lijn.name()+richting;
 	}
-	
+
+	@Override
 	public void naarVolgendeHalte(){
 		Positie volgendeHalte = lijn.getHalte(halteNummer+richting).getPositie();
 		totVolgendeHalte = lijn.getHalte(halteNummer).afstand(volgendeHalte);
 	}
-	
+
+	@Override
 	public boolean halteBereikt(){
 		halteNummer+=richting;
 		bijHalte=true;
@@ -47,7 +50,8 @@ public class Bus{
 		}		
 		return false;
 	}
-	
+
+	@Override
 	public void start() {
 		halteNummer = (richting==1) ? 0 : lijn.getLengte()-1;
 		System.out.printf("Bus %s is vertrokken van halte %s in richting %d.%n", 
@@ -55,6 +59,7 @@ public class Bus{
 		naarVolgendeHalte();
 	}
 
+	@Override
 	public boolean move(){
 		boolean eindpuntBereikt = false;
 		bijHalte=false;
@@ -69,7 +74,8 @@ public class Bus{
 		}
 		return eindpuntBereikt;
 	}
-	
+
+	@Override
 	public void sendETAs(int nu){
 		int i=0;
 		Bericht bericht = new Bericht(lijn.name(),bedrijf.name(),busID,nu);
@@ -88,7 +94,8 @@ public class Bus{
 		bericht.eindpunt=lijn.getHalte(i-richting).name();
 		sendBericht(bericht);
 	}
-	
+
+	@Override
 	public void sendLastETA(int nu){
 		Bericht bericht = new Bericht(lijn.name(),bedrijf.name(),busID,nu);
 		String eindpunt = lijn.getHalte(halteNummer).name();
@@ -98,6 +105,7 @@ public class Bus{
 		sendBericht(bericht);
 	}
 
+	@Override
 	public void sendBericht(Bericht bericht){
     	XStream xstream = new XStream();
     	xstream.alias("Bericht", Bericht.class);
