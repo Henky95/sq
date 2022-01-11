@@ -52,43 +52,6 @@ public class Runner {
 	}
 	
 	public static int initBussen(){
-<<<<<<< HEAD
-		List<IBus> busses = createBusses(1);
-		addBusses(busses);
-
-		busses = createBusses(2);
-		addBusses(busses);
-	}
-
-	public static List<IBus> createBusses(int richting){
-		IBus bus1=new Bus(Lijnen.LIJN1, Bedrijven.ARRIVA, richting);
-		IBus bus2=new Bus(Lijnen.LIJN2, Bedrijven.ARRIVA, richting);
-		IBus bus3=new Bus(Lijnen.LIJN3, Bedrijven.ARRIVA, richting);
-		IBus bus4=new Bus(Lijnen.LIJN4, Bedrijven.ARRIVA, richting);
-		IBus bus5=new Bus(Lijnen.LIJN5, Bedrijven.FLIXBUS, richting);
-		IBus bus6=new Bus(Lijnen.LIJN6, Bedrijven.QBUZZ, richting);
-		IBus bus7=new Bus(Lijnen.LIJN7, Bedrijven.QBUZZ, richting);
-		IBus bus8=new Bus(Lijnen.LIJN1, Bedrijven.ARRIVA, richting);
-		IBus bus9=new Bus(Lijnen.LIJN4, Bedrijven.ARRIVA, richting);
-		IBus bus10=new Bus(Lijnen.LIJN5, Bedrijven.FLIXBUS, richting);
-
-		return List.of(bus1,bus2,bus3,bus4,bus5,bus6,bus7,bus8,bus9,bus10);
-	}
-
-	public static void addBusses(List<IBus> busses){
-		addBus(3, busses.get(0));
-		addBus(5, busses.get(1));
-		addBus(4, busses.get(2));
-		addBus(6, busses.get(3));
-		addBus(3, busses.get(4));
-		addBus(5, busses.get(5));
-		addBus(4, busses.get(6));
-		addBus(6, busses.get(7));
-		addBus(12, busses.get(8));
-		addBus(10, busses.get(9));
-	}
-
-=======
 		Bus bus1=new Bus(Lijnen.LIJN1, Bedrijven.ARRIVA, 1);
 		Bus bus2=new Bus(Lijnen.LIJN2, Bedrijven.ARRIVA, 1);
 		Bus bus3=new Bus(Lijnen.LIJN3, Bedrijven.ARRIVA, 1);
@@ -132,7 +95,6 @@ public class Runner {
 		return Collections.min(busStart.keySet());
 	}
 	
->>>>>>> parent of b8e56f3 (wow)
 	public static void main(String[] args) throws InterruptedException {
 		int tijd=0;
 		int counter=0;
