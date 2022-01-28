@@ -1,8 +1,5 @@
 package hanze.nl.bussimulator;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
+import java.util.*;
 
 import hanze.nl.tijdtools.TijdFuncties;
 
@@ -52,7 +49,7 @@ public class Runner {
 			busETASender.sendETAs(nu, bus);
 		}				
 	}
-	
+
 	public static int initBussen(){
 		List<IBus> busses = createBusses(1);
 		addBusses(busses);
@@ -76,6 +73,19 @@ public class Runner {
 		IBus bus10=new Bus(Lijnen.LIJN5, Bedrijven.FLIXBUS, richting);
 
 		return List.of(bus1,bus2,bus3,bus4,bus5,bus6,bus7,bus8,bus9,bus10);
+	}
+
+	public static void addBusses(List<IBus> busses){
+		addBus(3, busses.get(0));
+		addBus(5, busses.get(1));
+		addBus(4, busses.get(2));
+		addBus(6, busses.get(3));
+		addBus(3, busses.get(4));
+		addBus(5, busses.get(5));
+		addBus(4, busses.get(6));
+		addBus(6, busses.get(7));
+		addBus(12, busses.get(8));
+		addBus(10, busses.get(9));
 	}
 	
 	public static void main(String[] args) throws InterruptedException {
