@@ -13,7 +13,9 @@ public class Runner {
 	private static ArrayList<IBus> actieveBussen = new ArrayList<IBus>();
 	private static int interval=1000;
 	private static int syncInterval=5;
-	
+
+	private static BusETASender busETASender = new BusETASender();
+
 	private static void addBus(int starttijd, IBus bus){
 		ArrayList<IBus> bussen = new ArrayList<IBus>();
 		if (busStart.containsKey(starttijd)) {
@@ -23,7 +25,7 @@ public class Runner {
 		busStart.put(starttijd,bussen);
 		bus.setbusID(starttijd);
 	}
-	
+
 	private static int startBussen(int tijd){
 		for (IBus bus : busStart.get(tijd)){
 			actieveBussen.add(bus);
@@ -31,24 +33,24 @@ public class Runner {
 		busStart.remove(tijd);
 		return (!busStart.isEmpty()) ? Collections.min(busStart.keySet()) : -1;
 	}
-	
+
 	public static void moveBussen(int nu){
 		Iterator<IBus> itr = actieveBussen.iterator();
 		while (itr.hasNext()) {
 			IBus bus = itr.next();
 			boolean eindpuntBereikt = bus.move();
 			if (eindpuntBereikt) {
-				bus.sendLastETA(nu);
+				busETASender.sendLastETA(nu,bus);
 				itr.remove();
 			}
-		}		
+		}
 	}
 
 	public static void sendETAs(int nu){
 		Iterator<IBus> itr = actieveBussen.iterator();
 		while (itr.hasNext()) {
 			IBus bus = itr.next();
-			bus.sendETAs(nu);
+			busETASender.sendETAs(nu, bus);
 		}				
 	}
 	
