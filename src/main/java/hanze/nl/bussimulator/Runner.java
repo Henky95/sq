@@ -60,6 +60,8 @@ public class Runner {
 
 		busses = createBusses(2);
 		addBusses(busses);
+
+		return Collections.min(busStart.keySet());
 	}
 
 	public static List<IBus> createBusses(int richting){
