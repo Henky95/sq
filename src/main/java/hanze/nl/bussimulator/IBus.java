@@ -1,3 +1,5 @@
+package hanze.nl.bussimulator;
+
 public interface IBus {
     public void setbusID(int starttijd);
 

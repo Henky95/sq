@@ -3,7 +3,7 @@ package hanze.nl.bussimulator;
 import com.thoughtworks.xstream.XStream;
 import hanze.nl.bussimulator.Halte.Positie;
 
-public class Bus extends IBus {
+public class Bus implements IBus {
 
 	private Bedrijven bedrijf;
 	private Lijnen lijn;
